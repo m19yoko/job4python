@@ -1,0 +1,6 @@
+●Pythonのメモ
+
+pipのインストール
+sudo python get-pip.py
+（get-pip.pyはググって落としてくること）
+
