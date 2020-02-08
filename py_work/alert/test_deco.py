@@ -13,24 +13,24 @@ def disp_para_cls(i, val):
 # クラス用デコレータ
 def deco_cls(func):
   def wrapper(*args, **kwargs):
-    print('--start--')
+    print(func.__name__ + '--start--')
     arg_l = list(args[1:])
     [ disp_para(i, v) for i, v in enumerate(arg_l) ]
     [ disp_para_dict(k, v) for k, v in kwargs.items() ]
             
     func(*args, **kwargs)
-    print('--end--')
+    print(func.__name__ + '--end--')
   return wrapper
 
 def deco(func):
   def wrapper(*args, **kwargs):
-    print('--start--')
+    print(func.__name__ + '--start--')
     arg_l = list(args)
     [ disp_para(i, v) for i, v in enumerate(arg_l) ]
     [ disp_para_dict(k, v) for k, v in kwargs.items() ]
             
     func(*args, **kwargs)
-    print('--end--')
+    print(func.__name__  + '--end--')
   return wrapper
 
 @deco
@@ -52,5 +52,5 @@ def main() :
   test2("Type-D", "あかさたな")
   test2("Type-E", msg="aiueo")
 
-if __name__ == "__main__":
+if __name__ == "__main__" :
   main()    

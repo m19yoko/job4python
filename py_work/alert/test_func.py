@@ -87,6 +87,8 @@ def main() :
   idxs_str = ",".join(idxs)
   print("連結文字列:" + idxs_str)
 
+  writeSyslog("You know my name!")
+
   print("処理終了:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))  
 
 if __name__ == "__main__":
