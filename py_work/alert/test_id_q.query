@@ -1,0 +1,5 @@
+query :
+  filter :
+    "@timestamp" :
+      gte : None
+      lt : None

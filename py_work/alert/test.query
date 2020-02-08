@@ -1,0 +1,4 @@
+LOG_DIFINITION :
+  PLOG_DIR : "./plog"
+  LOG_DIR : "./log"
+  TMPLOGDIR : "./tmplog"
