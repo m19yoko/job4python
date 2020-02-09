@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 import logging
+from comm.soc_log import SCLogger
 
 def getLogger(name, level=logging.INFO, saveName="SOC_base.log"):
   """
@@ -50,17 +51,25 @@ def killhandler(logger, handles):
 def main():
   print("処理開始:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))
 
-  log_dir = os.environ["LOGDIR"]
-  #if log_dir != None :
-  print(log_dir)
-  log_name = log_dir + "/SOC.log"
+  ifdef = 0
+  if ifdef != 0 :
+    log_dir = os.environ["LOGDIR"]
+    #if log_dir != None :
+    print(log_dir)
+    log_name = log_dir + "/SOC.log"
 
-  logger = getLogger("SOCEngine_log", saveName=log_name)
+    logger = getLogger("SOCEngine_log", saveName=log_name)
 
-  logger.info('Hello World!')
-  logger.warn('警告発生!')
+    logger.info('Hello World!')
+    logger.warn('警告発生!')
 
-  killLogger(logger)
+    killLogger(logger)
+  else :
+    s1 = socl.SCLogger()
+    s2 = socl.SCLogger()
+
+    if id(s1) == id(s2) :
+      print("同じインスタンス?")
 
   print("処理終了:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))
 

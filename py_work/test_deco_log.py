@@ -1,0 +1,67 @@
+import os
+import sys
+import yaml
+from comm.soc_log import SCLogger
+import comm.soc_log as scl
+from datetime import datetime
+
+@scl.SCLogWrite
+def test(msg):
+  msg2 = 'Hello Decorator ' + msg
+  print(msg2)
+  scl.SCLogger.writeInfo(sys._getframe().f_code.co_name, msg2)
+
+@scl.SCLogWrite
+def test2(typ, msg=None):
+  print('タイプ ' + typ)
+  if msg:
+    print('メッセージ ' + msg)
+
+class deco_test :
+  @scl.SCLogWriteCL
+  def __init__(self, msg=None):
+      if msg:
+        self.__in_msg = msg
+      else:
+        self.__in_msg = "Nooon"
+
+  @scl.SCLogWriteCL
+  def disp_msg(self, msg, msg2) :
+    print('Message in ' + msg + ' ' + msg2)
+
+  @scl.SCLogWriteCL
+  def disp_in_msg(self):
+    print("In Message " + self.__in_msg)
+
+  # クラスメソッドのデコレータを先に書く
+  @classmethod
+  @scl.SCLogWriteCL
+  def static_disp(cls, msg):
+    print("Static disp " + msg)
+
+
+def main():
+  print("処理開始:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))
+
+  basedir = os.path.dirname(__file__)
+  yml_fil = os.path.join(basedir, "alert/test.query")
+
+  with open(yml_fil, 'r', encoding='UTF-8') as conf:
+    cf = yaml.load(conf, Loader=yaml.FullLoader)
+
+  log_path = os.path.join(cf["LOGDIR"], "SOC_test.log")
+  SCLogger.init_logger("SOC_test.py", saveName=log_path)
+
+  test("テストメッセージ")
+
+  tc1 = deco_test()
+  tc1.disp_msg("aaa", "bbb")
+
+  tc2 = deco_test("construct para")
+  tc2.disp_in_msg()
+
+  SCLogger.destroy_logger()
+  print("処理終了:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))
+
+if __name__ == "__main__":
+  main()
