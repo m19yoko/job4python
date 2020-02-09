@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import timedelta
+from datetime import datetime
 import os
 import glob
 import logging
@@ -10,19 +11,21 @@ class SCLogger:
   logger = None
 
   @classmethod
-  def init_logger(cls, name, level=logging.INFO, saveName="SOC_base.log"):
+  def init_logger(cls, name, level=logging.INFO, dirName="./"):
     """
     Loggerを作成する。
     name：Loggerの名前（string)
     level:Loggingのレベル(int)
-    saveName：Loggerの保存先（string)
+    logBaseName：Loggerのファイル名(SOC_xxx_yyyymmdd.logのxxxの部分)
     """
     #ロガーの定義
     cls.logger = logging.getLogger(name)
     cls.logger.setLevel(level)
     #フォーマットの定義
-    formatter = logging.Formatter("%(process)d,%(asctime)s,%(levelname)s,%(name)s,%(message)s")
+    formatter = logging.Formatter("%(process)d,%(asctime)s,%(levelname)s,%(name)s:%(message)s")
     #ファイル書き込み用
+    saveName = "SOC_" + name + datetime.now().strftime("_%Y%m%d") + ".log"
+    saveName = os.path.join(dirName, saveName)
     fh = logging.FileHandler(saveName)
     fh.setFormatter(formatter)
     #コンソール出力用

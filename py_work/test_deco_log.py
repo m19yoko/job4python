@@ -49,8 +49,7 @@ def main():
   with open(yml_fil, 'r', encoding='UTF-8') as conf:
     cf = yaml.load(conf, Loader=yaml.FullLoader)
 
-  log_path = os.path.join(cf["LOGDIR"], "SOC_test.log")
-  SCLogger.init_logger("SOC_test.py", saveName=log_path)
+  SCLogger.init_logger("test_deco", dirName=cf["LOGDIR"])
 
   test("テストメッセージ")
 
