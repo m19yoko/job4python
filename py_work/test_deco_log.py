@@ -1,8 +1,8 @@
 import os
 import sys
 import yaml
-from comm.soc_log import SCLogger
-import comm.soc_log as scl
+from comm.sc_logger import SCLogger
+import comm.sc_logger as scl
 from datetime import datetime
 
 @scl.SCLogWrite
