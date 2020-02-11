@@ -33,6 +33,11 @@ class deco_test :
   def disp_in_msg(self):
     print("In Message " + self.__in_msg)
 
+  @scl.SCLogWriteCL
+  def msg_rtn(self, msg) -> str:
+    retmsg = "return value " + msg
+    return retmsg
+
   # クラスメソッドのデコレータを先に書く
   @classmethod
   @scl.SCLogWriteCL
@@ -58,6 +63,8 @@ def main():
 
   tc2 = deco_test("construct para")
   tc2.disp_in_msg()
+  rt = tc2.msg_rtn("あああ")
+  print(rt)
 
   SCLogger.destroy_logger()
   print("処理終了:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))

@@ -87,6 +87,9 @@ def main() :
   idxs_str = ",".join(idxs)
   print("連結文字列:" + idxs_str)
 
+  # 配列をf{}文字列に使う
+  print(f'要素1 [{idxs[0]}]')
+
   writeSyslog("You know my name!")
 
   print("処理終了:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))  

@@ -131,8 +131,12 @@ def SCLogWriteCL(func):
 
     SCLogger.logger.info(func.__name__ + ':処理開始 ' + msg)
 
-    func(*args, **kwargs)
-    SCLogger.logger.info(func.__name__ + ':処理終了')
+    ret = func(*args, **kwargs)
+    if ret != None :
+      SCLogger.logger.info(func.__name__ + ':処理終了 戻り値：'+ str(ret))
+      return ret
+    else :  
+      SCLogger.logger.info(func.__name__ + ':処理終了')
   return wrapper
 
 
@@ -151,6 +155,10 @@ def SCLogWrite(func):
 
     SCLogger.logger.info(func.__name__ + ':処理開始 ' + msg)
 
-    func(*args, **kwargs)
-    SCLogger.logger.info(func.__name__ + ':処理終了')
+    ret = func(*args, **kwargs)
+    if ret != None :
+      SCLogger.logger.info(func.__name__ + ':処理終了 戻り値：'+ str(ret))
+      return ret
+    else :  
+      SCLogger.logger.info(func.__name__ + ':処理終了')
   return wrapper
