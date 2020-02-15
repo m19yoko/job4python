@@ -120,6 +120,11 @@ def pickup_para(i, val):
 def SCLogWriteCL(func):
   def wrapper(*args, **kwargs):
     msg = ""
+    if type(args[0]) is type :
+      cl_name = args[0].__name__
+    else :
+      cl_name = args[0].__class__.__name__
+
     arg_l = list(args[1:])
     para_lst = [ pickup_para(i, v) for i, v in enumerate(arg_l) ]
     if len(para_lst) != 0 :
@@ -129,7 +134,7 @@ def SCLogWriteCL(func):
     if len(key_para_lst) != 0 :
       msg += " ".join(key_para_lst)
 
-    SCLogger.logger.info(func.__name__ + ':処理開始 ' + msg)
+    SCLogger.logger.info(cl_name + ":" + func.__name__ + ':処理開始 ' + msg)
 
     ret = func(*args, **kwargs)
     if ret != None :

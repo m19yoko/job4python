@@ -42,6 +42,9 @@ class deco_test :
   @classmethod
   @scl.SCLogWriteCL
   def static_disp(cls, msg):
+    print("cls名:" + cls.__name__)
+    chk = type(cls) is type
+    print("clsチェック:" + str(chk))
     print("Static disp " + msg)
 
 
@@ -65,6 +68,7 @@ def main():
   tc2.disp_in_msg()
   rt = tc2.msg_rtn("あああ")
   print(rt)
+  deco_test.static_disp("いいい")
 
   SCLogger.destroy_logger()
   print("処理終了:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))
