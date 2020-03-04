@@ -24,6 +24,7 @@ def writeSyslog(msg):
 
 def main() :
   print("処理開始:" + datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f%z"))
+  print("カレントパス:"  + os.getcwd())
   # __file__はファイルのフルパスでなく、python3コマンドで指定したファイル名が格納される
   basedir = os.path.dirname(__file__)
 
@@ -41,7 +42,7 @@ def main() :
     if not os.path.isdir(d) :
       os.makedirs(d)
 
-  qfil = "./test_id_q.query"
+  qfil = os.path.join(basedir, "test_id_q.query")
   with open(qfil, 'r', encoding='UTF-8') as q:
     qr = yaml.load(q, Loader=yaml.FullLoader)
 
